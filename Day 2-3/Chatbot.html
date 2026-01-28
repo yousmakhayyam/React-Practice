@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot</title>
+  </head>
+
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+      function MessageInput() {
+        return (
+          <>
+            <input
+              placeholder="Send a message to Chatbot"
+              size="30"
+            />
+            <button>Send</button>
+          </>
+        );
+      }
+
+      function MessageBubble({ text, from }) {
+        return (
+          <div>
+            {from === 'robot' && (
+              <img src="robot.png" width="50" alt="robot" />
+            )}
+
+            {text}
+
+            {from === 'user' && (
+              <img src="user.png" width="50" alt="user" />
+            )}
+          </div>
+        );
+      }
+
+      function ChatList() {
+        const messages = [
+          { text: 'Hello chatbot', from: 'user', id: 'id1' },
+          { text: 'Hello human', from: 'robot', id: 'id2' },
+          { text: 'How are you?', from: 'user', id: 'id3' },
+          { text: 'I am fine 😊', from: 'robot', id: 'id4' }
+        ];
+
+        function handleSend() {
+          messages.push({
+            text: 'hello',
+            from: 'user',
+            id: crypto.randomUUID()
+          });
+          console.log(messages);
+        }
+
+        return (
+          <>
+            <button onClick={handleSend}>SEND MESSAGE</button>
+
+            {messages.map((msg) => (
+              <MessageBubble
+                key={msg.id}
+                text={msg.text}
+                from={msg.from}
+              />
+            ))}
+          </>
+        );
+      }
+
+      function ChatApp() {
+        return (
+          <>
+            <MessageInput />
+            <ChatList />
+          </>
+        );
+      }
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<ChatApp />);
+    </script>
+  </body>
+</html>
