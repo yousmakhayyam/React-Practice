@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { MessageInput } from './components/MessageInput';
 import ChatList from './components/ChatList';
 import dayjs from 'dayjs';
@@ -8,20 +8,34 @@ import './App.css'
 function App() {
   const now = dayjs().valueOf();
 
-  const [chatList, setchatList] = useState([
-    { text: 'Hello chatbot', from: 'user', time: now, id: 'id1' },
-    { text: 'Hi how can i help you?', from: 'robot', time: now, id: 'id2' },
-    { text: 'How are you?', from: 'user', time: now, id: 'id3' },
-    { text: 'I am fine 😊', from: 'robot', time: now, id: 'id4' }
-  ]);
+  const [chatList, setchatList] = useState(
+    JSON.parse(localStorage.getItem('messages')) || [
+      { text: 'Hello chatbot', from: 'robot', time: now, id: 'id1' }
+    ]
+  );
+
+  useEffect(() => {
+    localStorage.setItem('messages', JSON.stringify(chatList));
+  }, [chatList]);
+
+  function clearChat() {
+    setchatList([]); 
+  }
 
   return (
     <div className="app-container">
+    
       <ChatList ChatList={chatList} />
-      <MessageInput
-        ChatList={chatList}
-        setChatList={setchatList}
-      />
+
+      <div className="input-row"> 
+        <MessageInput 
+          ChatList={chatList} 
+          setChatList={setchatList} 
+        />
+        <button className="clear-button" onClick={clearChat}>
+          Clear
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,32 +1,3 @@
-   body {
-        font-family: Arial, Helvetica, sans-serif;
-        margin-top: 0px;
-        margin-bottom: 0px;
-      }
-
-      .send-button {
-        background-color: rgb(25, 135, 84);
-        color: white;
-        padding: 12px 20px;
-        margin-left: 10px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 15px;
-      }
-
-      .chatInput {
-        padding: 12px 15px;
-        border-radius: 10px;
-        font-size: 15px;
-        border-width: 1px;
-        flex-grow: 1;
-      }
-
-      .input-container {
-        display: flex;
-        margin-bottom: 60px;
-      }
 
       .app-container {
         max-width: 600px;
@@ -36,35 +7,40 @@
         display: flex;
         flex-direction: column;
       }
+/* Container jo MessageInput aur Clear button ko hold karta hai */
+.input-row {
+  display: flex;
+  align-items: center; /* Vertical center alignment */
+  justify-content: center;
+  gap: 0px; /* Gap hum buttons ki margin se control karenge */
+  margin-bottom: 60px; /* Jo pehle input-container mein tha */
+  width: 100%;
+}
 
-      .msguser {
-        display: flex;
-        justify-content: end;
-        align-items: start;
-      }
+.clear-button {
+  background-color: white;
+  border: 1px solid #d1d1d1; 
+  color: black;
+  
+  padding: 12px 20px; 
+  margin-left: 10px;
+  border-radius: 10px;
+  
+  cursor: pointer;
+  font-size: 15px;
 
-      .msgrobot {
-        display: flex;
-        align-items: start;
-      }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background-color 0.2s;
+}
 
-      .chat-message {
-        background-color: rgba(238, 238, 238);
-        padding: 15px 20px;
-        border-radius: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-bottom: 20px;
-        max-width: 300px;
-      }
+.clear-button:hover {
+  background-color: #f8f9fa;
+}
 
-      .profile-image {
-        width: 45px;
-      }
-
-      .message-container {
-        flex-grow: 1;
-        margin-top: 20px;
-        overflow: scroll;
-        scrollbar-width: none;
-      }
+.input-container {
+  margin-bottom: 0px !important; 
+  flex-grow: 1; 
+}
